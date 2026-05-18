@@ -1,0 +1,10 @@
+# Hide your API keys if you ever move them to a config file
+config.js
+.env
+
+# Windows junk
+Thumbs.db
+desktop.ini
+
+# VS Code
+.vscode/

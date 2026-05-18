@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      width: 380px;
+      min-height: 500px;
+      background-color: #0f0f13;
+background-image: 
+  linear-gradient(rgba(108,99,255,0.07) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(108,99,255,0.07) 1px, transparent 1px);
+background-size: 24px 24px;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
+    .logo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 2px;
+  font-family: 'Bebas Neue', sans-serif;
+}
+
+    .logo span { color: #6c63ff; }
+
+    .date {
+      font-size: 12px;
+      color: #555;
+    }
+
+    .section-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: #1a1a24;
+      border-radius: 12px;
+      padding: 14px;
+    }
+
+    .stat-value {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .stat-label { font-size: 11px; color: #666; }
+
+    .educational { color: #4ade80; }
+    .entertainment { color: #f87171; }
+    .browsing { color: #60a5fa; }
+    .ambiguous { color: #fbbf24; }
+
+    .video-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 24px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    .video-item {
+      background: #1a1a24;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      border-left: 3px solid transparent;
+    }
+
+    .video-item.educational { border-left-color: #4ade80; }
+    .video-item.entertainment { border-left-color: #f87171; }
+    .video-item.ambiguous { border-left-color: #fbbf24; }
+    .video-item.unknown { border-left-color: #333; }
+
+    .video-flag { font-size: 14px; flex-shrink: 0; margin-top: 2px; }
+
+    .video-info { flex: 1; }
+
+    .video-title {
+      font-size: 12px;
+      color: #ccc;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+
+    .video-tag {
+      display: inline-block;
+      font-size: 9px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-bottom: 4px;
+    }
+
+    .video-tag.educational { background: rgba(74,222,128,0.15); color: #4ade80; }
+    .video-tag.entertainment { background: rgba(248,113,113,0.15); color: #f87171; }
+    .video-tag.ambiguous { background: rgba(251,191,36,0.15); color: #fbbf24; }
+    .video-tag.unknown { background: rgba(100,100,100,0.15); color: #555; }
+
+    .video-reason {
+      font-size: 10px;
+      color: #555;
+      line-height: 1.4;
+    }
+
+    .breakdown-wrap {
+      background: #1a1a24;
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 24px;
+    }
+
+    .breakdown-bar {
+      display: flex;
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 10px;
+      background: #2a2a36;
+      gap: 2px;
+    }
+
+    .breakdown-segment { height: 100%; transition: width 0.4s ease; }
+
+    .breakdown-labels {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .breakdown-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #888;
+    }
+
+    .breakdown-label-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .score-card {
+      background: #1a1a24;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .score-top {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .score-value {
+      font-size: 48px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .score-rank {
+      font-size: 12px;
+      text-align: left;
+      line-height: 1.8;
+    }
+
+    .score-label {
+      font-size: 11px;
+      color: #555;
+      margin-bottom: 12px;
+    }
+
+    .score-insight {
+      font-size: 12px;
+      color: #888;
+      line-height: 1.6;
+      background: #0f0f13;
+      border-radius: 8px;
+      padding: 10px 12px;
+      border-left: 3px solid #6c63ff;
+      text-align: left;
+    }
+
+    .domain-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+
+    .domain-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1a1a24;
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .domain-left { flex: 1; }
+
+    .domain-name {
+      font-size: 12px;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+
+    .domain-name.productive { color: #4ade80; }
+
+    .bar-bg {
+      height: 3px;
+      background: #2a2a36;
+      border-radius: 2px;
+    }
+
+    .bar-fill {
+      height: 3px;
+      border-radius: 2px;
+      background: #6c63ff;
+    }
+
+    .bar-fill.productive {
+      background: #4ade80;
+      box-shadow: 0 0 6px rgba(74,222,128,0.4);
+    }
+
+    .domain-time {
+      font-size: 12px;
+      color: #fff;
+      font-weight: 600;
+      margin-left: 12px;
+    }
+
+    .empty {
+      text-align: center;
+      color: #444;
+      font-size: 13px;
+      padding: 20px;
+    }
+
+    .live-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      background: #4ade80;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: blink 1s infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo">Locked<span>In</span></div>
+    <div class="date" id="date"></div>
+  </div>
+
+  <div class="section-title">YouTube Activity</div>
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-value educational" id="edu-count">0</div>
+      <div class="stat-label">Educational</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value entertainment" id="ent-count">0</div>
+      <div class="stat-label">Entertainment</div>
+    </div>
+  </div>
+
+  <div class="section-title">Videos Watched</div>
+  <div class="video-list" id="video-list">
+    <div class="empty">No videos tracked yet today</div>
+  </div>
+
+  <div class="section-title">YouTube Breakdown</div>
+  <div class="breakdown-wrap">
+    <div class="breakdown-bar" id="breakdown-bar"></div>
+    <div class="breakdown-labels" id="breakdown-labels"></div>
+  </div>
+
+  <div class="section-title">Today's Score</div>
+  <div class="score-card" id="score-card"></div>
+
+  <div class="section-title">Time by Site</div>
+  <div class="domain-list" id="domain-list">
+    <div class="empty">No data yet</div>
+  </div>
+  <div style="text-align:center; margin-top: 8px;">
+<div style="text-align:center; margin-top: 8px;">
+  <button id="open-full-btn"
+    style="background:none; border:1px solid #2a2a36; color:#555; font-size:10px; 
+    padding:6px 12px; border-radius:6px; cursor:pointer; font-family: inherit;">
+    ↗ Open full view
+  </button>
+</div>
+</div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
